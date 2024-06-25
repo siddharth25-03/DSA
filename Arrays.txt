@@ -1,0 +1,474 @@
+
+**HASHING**
+
+hashing is done to store the repetation of numbers in some other array 
+
+first all the numbers are initialised as zero(in the hashed array) and added as and when we traverse through the array(main array) so that we complete the task in 0(n) time 
+
+we make the hashed array the size of maximum number which is asked in the input
+suppose 1,2,3,6,12 is asked that how many times each of these numbers repeat in an array.
+we make the hashed array the size of 13 (from 0 to 12) so as to store the number of repeatation for each number.
+
+the maximum size of array for int inside main is 10^6 (1e6)
+the maximum size of array for int globally is 10^7 (1e7)
+the maximum size of array for bool inside main is 10^7 (1e7)
+the maximum size of array for bool globally is 10^8 (1e8)
+
+for hashing just the lower case characters we take an array of arr[26] (0(a) to 25(z))
+for this mapping we will have to do char-'a' and char - 'A' for upper case as 
+'a' - 'a' ==> 0 
+'b' - 'a' ==> 1 
+'c' - 'a' ==> 2 
+ 
+like this it will go on 
+for all the character just take an array of size 256( arr[255]) as there are only 256 characters so it will map directly to its location 
+
+instead of maintaining an array we can use a map which is far more better 
+map< int, int > mpp;
+the first int will store the value
+the second int will store the frequency
+ 
+map takes the time complexity of logn for storing and fetching in best, worst and average case
+
+Unordered map takes the time complexity of O(1) for storing and fetching in best,average but in the worst case it takes o(n) but this happens very rarely
+it is o(n) as suppose that all the numbers in linear chaining are hashed to the same spot numbers such as 108,88,98,38.....(by division method) will all be hashed to 8th position so the time taken to find inside the 8th position will be n iterations 
+so it will be o(n)
+
+it is valid in map 
+map<pair<int,int>,int>mpp;
+
+
+it is not valid in unordered map 
+map<pair<int,int>,int>mpp;
+we have to place values like double or int in place of pair
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+ARRAYS(LEC 17)
+
+If we declare the array in the main the array gets defined with garbage values filled in it
+
+If we declare the array in the outside main(globally) the array gets defined with 0 filled in it
+
+The starting address of an array is stored if we want to access it
+
+1) LARGEST ELEMENT IN AN ARRAYS
+
+BRUTE
+By sorting and then retuning the last element will take time complexity of nlogn(for sorting)
+
+OPTIMAL
+By traversing an array and initialising the largest as the first element takes time complexity of n
+
+2) SECOND LARGEST ELEMENT IN THE ARRAY
+
+BRUTE
+first sorting the array and then placing the largest as arr[n-1] and then checking from behind the second largest element in the whole array which in worst case(1 7 7 7 7 ) will take O(n) so the total time complexity will be O(nlogn + n)
+
+BETTER
+In the first iteration finding the largest element and then again iterating the array and finding the second largest element (
+second largest=-1;
+for(int i=0;i<n;i++){
+    if(arr[i]<largest && arr[i]>second largest){
+        second largest=arr[i];
+    }
+}
+)
+
+OPTIMAL
+If you are the first and if some one makes more marks then you then you become the second (this concept is used)
+time complexity O(n)
+
+largest=arr[0]
+slargest=-1;
+for(int i=1;i<n;i++){
+    if(arr[i]>largest ){
+        slargest=largest;
+        largest=arr[i];        // giving the throne to another number
+    }
+    else if(arr[i]<largest && arr[i]>slargest){
+        slargest=arr[i];
+    }
+}
+
+3) CHECK IF THE ARRAY IS SORTED
+
+4) REMOVING DUPLICATES FROM THE SORTED ARRAY
+
+BRUTE
+using a set 
+take complexity of O(nlogn + n ) -> nlogn for inserting elements into the stack 
+space of O(n)
+
+OPTIMAL 
+using  2 pointers(placing the array without duplicates at the starting  and then not caring for the rest of the elements)
+i=0;
+j=1 to n;
+if ar[i]!= arr[j] then take its front position then i++ and then check for next j
+
+5) LEFT ROTATE BY ONE PLACE
+
+OPTIMAL
+from the first index shift each of them to index before( arr[i-1]=arr[i] ) and then place the first element to the last position
+
+6) LEFT ROTATE BY D PLACES
+If you rotate the array (D=number of elements times) then it comes back to being the original array
+so if array size is 7 and we rotate the array 22(7+7+7+1) times then we have to rotate the array actually 1 time only
+so D=D%7 times we have to rotate
+
+BRUTE
+storing the D elements in an array and then shifting the rest elements to i-d place then adding the elements stored in the array to the end position 
+
+OPTIMAL
+reversing the D part and then reversing the rest elements and then reversing the whole array will give us the answer
+
+7) MOVE ALL THE ZEROES TO THE END OF THE ARRAY
+
+BRUTE 
+storing the elements that are non zero in the temp array and the tranferring these elements back to the original and then while(size!=arr.size()) we will add zeroes to the end 
+space: O(x)
+time:O(2N)
+
+
+OPTIMAL
+2 pointer approach
+the j will always be on the 0 and i will be on the non zero number and then we will swap the elements
+i will always move and j will always remain on 0
+space: O(1)
+time:O(N)
+
+8) UNION OF 2 SORTED ARRAYS
+
+BRUTE
+using the set to add the elements of both the arrays and then adding these set elements to another array which will be the final answer
+space: O(n1+n2) + O(n1+n2)
+time:O(N1logn + n2logn + n1+n2 )
+
+OPTIMAL
+2 pointer
+make union array
+we will take i to iterate the first array and j to iterate the second array
+
+we will add the smallest element after comparing both the elements to the union array and while if other list is not exhausted we will add all the elements to the union array ( like merge sort )
+
+while adding we will check with the latest element that we have added to the array  
+space: O(n1+n2) for returning
+time:O(n1+n2 )
+
+9) INTERSECTION OF 2 SORTED ARRAYS
+
+BRUTE
+we will take an element from the first array and then check the entire next array for that element
+we will also maintain a visited array so as to not add the repeated element
+
+OPTIMAL
+we will take i to iterate the first array and j to iterate the second array
+iterate the smaller element 
+if they are equal then i++ and j++ ( let other elements find their partner )( like polynomial subtraction code)
+
+10) MISSING NUMBER ( N is given and we have the find the missing number from  1 to n in the array )
+
+BRUTE
+traversing the whole array to check for every arr[i](every element linear search )
+time complexity: O(n^2)
+space complexity: O(1)
+
+BETTER
+By using a hash array
+iterating n times to set the hash array and then n times in the hash array to find the answer
+time complexity: O(n+n)
+space complexity: O(N) ( because using an hash array )   
+
+OPTIMAL
+there are two approaches 
+
+i) SUM
+subtracting the sum of n numbers with the actual sum of numbers in the array
+sum of n numbers = (n*(n+1))/2 
+actual sum= accumulate();
+ans= sum of n numbers- actual sum
+time complexity: O(n)
+space complexity: O(1)
+
+ii)XOR
+the XOR of same numbers is 0 and 0 xor( ^ ) with any number is that number itself
+so if we take the xor of n numbers and xor of actual given numbers then we get
+actual= 1^2^4^5
+n numbers= 1^2^3^4^5
+and then we take the xor of (xor1 ^ xor2) we get the missing number then 
+this method is better than sum as if we are given a 1e^5 number than integer will overflow in this formula (n*(n+1))/2 but this method does not have any retrictions
+time complexity: O(n)
+space complexity: O(1)
+
+11) MAXIMUM CONSECUTIVE ONES
+
+OPTIMAL
+we will take 2 variables count(which will count CONSECUTIVE number of ones and will return to zero if some other number appears ) and maximum( which we will compare with count and update accordingly )
+time complexity: O(n)
+space complexity: O(1)
+
+12) FIND THE NUMBER THAT APPEARS ONCE AND THE OTHERS TWICE 
+
+BRUTE
+taking each number and finding the count for the same number
+time complexity: O(n^2)
+space complexity: O(1)
+
+BETTER
+can use hash array(but the maximum size it can take is 1e^6 inside the main) because of this we will use map
+to iterate the map we will use it->first(key) and it->second(value)
+
+by using map:-
+time complexity: nlogn(storing) + O(n/2+1)(retreiving is n/2 as numbers are repeaeted and 1 for the number which is not repeaeted)
+
+space complexity: O(n/2+1)
+
+by using unordered map:-
+time complexity:  O(n/2+1) (retreiving is n/2 as numbers are repeaeted and 1 for the number which is not repeaeted)
+space complexity: O(n/2+1)
+
+OPTIMAL
+doing xor of all the numbers as xor of same numbers is 0 it will eventually return the non repeaeted number 
+time complexity: O(n)
+space complexity: O(1)
+
+13) LONGEST SUBARRAY WITH SUM K
+subarray: contiguous 
+subsequence: not necessary contiguous
+
+to generate all the subarrays we will use 2 pointer approach
+the subarray will be from i to j where j will start from i  
+
+BRUTE
+we will use 2 for loops to calculate the sum for each subarray and fix the length to the maximum length of the subarray 
+
+BETTER
+
+
+14) 2-SUM
+
+BRUTE
+add every element with every other element which is greater in index than current ( like selection sort )
+time complexity: O(n^2)
+space complexity: O(1)
+
+
+BETTER ( used for both YES and No and returning the indexes)
+by using hashing key(value in the array) -> value(index of the value)
+by iterating the array from 0 to n-1 and checking if the (target-current) value exists in the map that we have traversed till now
+if it does than we return the indexes of both current and that which is stored in the hashmap 
+time complexity: O(n)
+space complexity: O(n)
+
+OPTIMAL ( for only telling YES or NO )
+using a 2 pointer approach 
+first sorting the array and then keeping i=0 and j=n-1 position
+the if our addition of i and j is greater we decrement the j value 
+or if our addition of i and j is smaller we increment the i value 
+time complexity: O(n) + O(nlogn){for sorting}
+space complexity: O(1)
+
+15) SORT AN ARRAY OF 0 1 AND 2 
+
+BRUTE 
+using normal sort() function if c++ stl
+time complexity: O(nlogn)
+space complexity: variable for sort function
+
+
+BETTER 
+maintaing the count for number of 0's 1's and 2's 
+and then filling the original array again with the number of 0's 1's and 2's  
+
+OPTIMAL ( Dutch national flag algorithm )
+
+we have the assumption that
+
+arr[0] to arr[low – 1] --> we have all zeroes
+arr[low] to arr[mid – 1] --> we have all ones
+arr[mid] to arr[high] --> we have the unsorted portion
+arr[high+1] to arr[n-1] --> we have all twos
+
+so we initalise the low and mid to starting index and high to n-1
+while(mid<=high){as this is our unsorted portion} we will iterate
+if 0 comes we will swap it with arr[low] and do low++ and mid++
+if 1 comes we will do mid++
+if 2 comes we will swap it with arr[high+1] and do high--
+
+16) MAJORITY ELEMENT
+
+BRUTE
+checking the count for each element and returning if it is greater than n/2
+time complexity: O(n^2)
+space complexity: O(1)
+
+BETTER
+using a hashmap and then checking the frequency for each element and returning the element with >n/2 frequency
+time complexity: O(n){to iterate and store}+O(n){to fetch from the map}
+space complexity: O(n)
+
+OPTIMAL (moores voting algorithm) ( it is like election within the given subarray ) ( cancellation logic )
+we iterate throught the array consider 1st one as the MAJORITY element and then doing a count++ for similar element and count-- for not that element which we have considered if the count reaches 0 it means that it is not the majority element within the given subarray so we then again place the majority element pointer to the element where the count becomes zero( so this is our new majority element ) and then again repeat the process 
+
+the final element which we get after iterating through the whole array is the majority element and we have to check it again for conformation 
+time complexity: O(n){to iterate }+O(n){for conformation}
+space complexity: O(1)
+
+17) MAXIMUM SUBARRAY SUM
+
+BRUTE
+checking out for all the subarray's sum and placing the maximum accordingly
+time complexity: O(n^3) 
+space complexity: O(1)
+
+BETTER
+just removing the third loop and adding the previous sum generated with the incoming element
+time complexity: O(n^2) 
+space complexity: O(1)
+
+OPTIMAL (kadanes algorithm)
+we will keep a variable sum and if the sum drops below 0 then we again reinitialse it with 0 as taking forward a negative sum will only harm our effective sum in the end
+we have to carry forward a +ve sum as it will only help to increase our effective sum 
+this is kadane's algorithm
+
+18) REARRANGE ARRAY ELEMENTS BY SIGN
+
+i) if number if +ve and -ve numbers are equal
+it is seen that every even index is taken by +ve number and every odd index is taken by -ve so we need to do this accordingly
+
+ii) if number if +ve and -ve numbers are not equal
+we seperate the positive and -ve numbers in 2 different vectors and then add them in the final array accordingly( like merge sort algo )
+
+19) LEADERS IN THE ARRAY 
+
+BRUTE
+for every element checking all the next elements till n, if all the elements are smaller than we add this into the array of leaders else we do not add
+
+OPTIMAL
+we start from the end of the array and then check if the number is greater than the maximum, if it is then it is a leader and we change the maximum to that number and then repeat these steps
+
+20) LONGEST CONSECUTIVE SEQUENCE
+
+BRUTE 
+we check for every element that the next element exists or not and increment the count accordingly
+time complexity: O(n^2)
+space complexity : O(1)
+
+BETTER
+first we need to sort the array
+we maintain lastsmaller=INT_MIN variable
+if on the current element we have the last smaller== current element value - 1 then we will do count ++
+if we get the last smaller== current element value then we will do nothing
+if we get the value last smaller != current element value - 1 then we will set the current element as the lastsmaller and start finding the sequence from there
+time complexity: O(nlog) + O(N)
+space complexity : O(1)
+
+OPTIMAL
+we use a UNOREDERED set 
+we iterate through the array and find that if the (array element - 1) if it is present in the set we will not start our iteration as the starting of any sequence the element before that is not present 
+time complexity: O(N){to input the elements into the stack } + O(N+2N){to find all the things in stack}
+space complexity : O(N)
+
+21) SET MATRIX ZEROES
+
+BRUTE
+iterating through the array and setting the elements in that particular row or column as -1
+again iterating through the array to set the -1 elements to zero
+time complexity: O(N^3)
+space complexity : O(1)
+
+BETTER
+we will take 2 vector representing the row and column of the matrix 
+we will mark the row and column if zero occurs 
+and then iterate through the entire array again to make the marked row and column as zero
+
+OPTIMAL
+taking the 2 vector inside the 2D array only and taking a single box outside for conflicting space of row and column vector
+after marking we will make the insides first as zeros wherever marked and then the row and column( which represent the matrix )
+
+22) ROTATE MATRIX
+
+BRUTE
+we will use an extra matrix and just traverse the  original matrix and and set its place in the extra matrix 
+ans[j][n-1-i]=matrix[i][j]
+time complexity: O(N^2)
+space complexity: O(N^2)
+
+OPTIMAL
+we will do inplace transformations
+we will first transpose the matrix( see video )(diagonal elements do not change their position )( swap(matrix[i][j],matrix[j][i]) )( where i goes from 0 to second last element and j goes from 0 to last element ) + reverse the matrix row wise
+time complexity: O(N/2 * N/2)(for transpose) + O(N*N/2)(for reversing each n rows)
+space complexity: O(1)
+
+23) SPIRAL TRAVERSAL OF MATRIX
+
+we will do it in this order ==> right down left up 
+we will use 4 pointers ==> top, bottom , left, right
+we will have to add some little extra case for a single row and single column case
+
+24) PASCAL TRIANGLE
+
+i) IF ONLY THE SINGLE ELEMENT OF A PARTICULAR ROW AND COLUMN IS ASKED
+we will do n-1Cr-1 for that element
+but we will not calculate n-r factorial
+for code see video 
+
+ii) IF ONLY SINGLE ROW IS ASKED
+we will do math
+row will start from 1 to n 
+column from 1 to noofrows-1
+we will first add the element 1 to the list and then mutiply rownum - col / col to get the next element in the current row
+see video
+
+25) MAJORITY ELEMENT ( >floor(n/3) times)
+observation: at max only 2 elements can appear in the final answer
+
+BRUTE
+for every element checking the array and incrementing the count of particular element (2 for loops )
+time complexity: O(N^2)
+space complexity: O(1)
+
+BETTER
+using a hashmap 
+while adding the element in the hashmap we will check with its frequency, if it is greater than floor(n/3) and if it is we will add this element to the list of answers
+
+OPTIMAL
+
+it is same as MAJORITY ELEMENT (>n/2) but here we will use 2 pointers instead of one and add some edge case that ele1!=ele2 thats it
+else all the rest is same just that it is done for 2 elements
+after getting the ele1 and ele2 we will also again check if they are majoirty by again iterating in the array and then finally add them to the list of ans
+
+26) 3 SUM 
+BRUTE
+Taking all the possible combinations (i=1 to n), (j=i+1 to n) and (k=j+1 to n) ( to find all possible combinations )
+time complexity: O(N^3)
+space complexity: O(1)
+
+BETTER 
+using a hasmap and taking all the possible combinations of i and j and then subtracting them from 0 to find the third number like done previously
+time complexity: O(N^2)
+space complexity: O(1)
+
+OPTIMAL
+we have to sort the array
+taking 3 pointer i j and k where j is at the middle and k( k=n-1 ) is at the end and i is before j ( so j=i+1 ) 
+only j and k will move
+if we found one combination then we have to move out of the similar number for j and k both 
+we will run and while loop till j<k
+we have to move out of the similar number this applies for i as well as we do not want redundent data 
+
+26) MAXIMUM PRODUCT SUBARRAY
+
+BRUTE
+taking all the combinations and finding the MAXIMUM
+
+OPTIMAL 
+taking the product of whole array as prefix( from front ) and suffix( from behind ) and updating the maximum 
+if zero appears in the array we set the prefix and suffix back to 1 
+
+
+
+
+
+
+
+

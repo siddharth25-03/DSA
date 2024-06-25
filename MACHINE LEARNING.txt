@@ -1,0 +1,192 @@
+MACHINE LEARNING
+
+data modelling:- (rough idea) 
+1) Problem definiton ( unsupervied, supervised, classification or regression )
+2) data ( structured or unstructured ) 
+3) evalution 
+4) features ( what do we know about the data ) 
+5) modelling ( what machine learning model to use ) 
+6) experimentation 
+
+1) Problem definiton 
+*supervised:when the data and the output is known then the computer repeats the process to get better and better 
+types:-
+classification: binary and multiclass (this or that) 
+regression: prediction on data
+
+*unsupervised: when we don't have the output
+
+*transfer learning: ek hi model dussre mai use karna
+
+*reinforcement learning: giving the model good for doing the task right and punishing it for making errors
+
+2) Data
+
+structured: arrange in ordered format(row and column)
+unstructured: images
+
+static data: they dont change overtime(heart disease) 
+streaming data: stock prices
+
+workflow:
+data ko leke plot ( jupyter)--> (pandas) se data analyse--> (matplotlib) se plotting graph --> (scikit learn) se model banana
+
+3)Evalution: konsa evaluation matrix will define the success of our model( root mean square wagera) 
+
+4)Features: What do we know about the data
+
+5)Modelling: 
+3 Parts:-
+1* choosing and training a model(padhai) 
+2* tuning a model(sums practice to improve) 
+3* model comparison(actual exam) (overfitting and underfitting)
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+INTRO TO PANDAS
+
+import pandas as pd --> to import pandas
+
+
+//1-D series in pandas
+
+cars=pd.Series(["BMW","toyota","ertiga"]) --> this is like the list of python just in column wise arranged
+colours=pd.Series(["white","pink","blue"]) --> this is like the list of python just in column wise arranged
+
+//2-D dataframe in pandas
+
+variable=pd.DataFrame({"Carmake":cars, "Colours":colours}) --> this is written in dictonary format of python language where the Carmake and Colours is title of the column and cars and colours are the values of the series which we have made above
+
+//To read data files
+car_sales=pd.read_csv("filename.csv")
+
+//To export data files
+car_sales.to_csv("exportedfilename.csv") --> this will export the data set with name of exportedfilename in csv format
+car_sales.to_excel("exportedfilename.xls") --> this will export the data set with name of exportedfilename in excel format
+
+car_sales.to_csv("exportedfilename.csv", index=False) --> this will export the data set with name of exportedfilename in csv format and this will also remove the unnamed column of index 
+
+//To export data files from URL
+
+This is helpful if you have the data downloaded to your computer or in the same directory as your notebook.
+But if you don't, another great feature of pandas is being able to import .csv files directly from a URL.
+For example, for the heart-disease.csv file, using the read_csv() function you can directly import it using the URL from the course GitHub repo:
+heart_disease = pd.read_csv("https://raw.githubusercontent.com/mrdbourke/zero-to-mastery-ml/master/data/heart-disease.csv")
+Note: If you're using a link from GitHub, make sure it's in the "raw" format, by clicking the raw button.
+
+
+
+// DESCRIBING Data
+
+car_sales.dtypes --> gives the info of data type in each column
+
+car_sales.columns --> gives the column names as a list
+
+car_sales.index --> gives the starting and the ending index of the rows 
+
+car_sales.describe() --> gives the count, mean , std, min , max of integer type columns 
+
+car_sales.mean(numeric_only=True) --> This tells pandas to only find the mean/average on numerical columns (not string-based columns).
+
+car_sales.sum() --> sums all the columns (even the string columns)
+
+len(car_sales) --> give the number of rows in the data
+
+car_sales["Doors"].sum() --> this will give the sum of the particular column "Doors" in the data
+
+// SELECTING and VIEWING data
+
+car_sales.head() --> this will reveal the first 5(default) rows from the start
+car_sales.head(7) --> this will reveal the first 7 rows from the start
+
+car_sales.tail() --> this will reveal the last 5(default) rows from the end
+car_sales.tail(7) --> this will reveal the last 7 rows from the end
+
+animals.loc[3] --> this will return the rows which have 3 as the index
+animals.loc[9] --> this will return the rows which have 9 as the index
+
+animals.iloc[3] --> this will return the rows which have 3 as the position(as in set 0,1,2,3......)
+animals.iloc[:3] --> this will return the rows from start to position 2 not including the position 3 
+
+animals.loc[:3] --> this will return the rows from start to index 3 including the position 3 
+
+car_sales["Make"] and car_sales.Make --> they both are same just syntax is different, they select the column with name Make
+
+car_sales[car_sales["Make"]=="Toyota"] --> this will only list the rows which have Toyota as their "Make" 
+
+car_sales[car_sales["Odometer (KM)"]>100000 ] --> this will only list the rows which have Odometer (KM) greater than 100000 
+
+car_sales.groupby(["Make"]).mean() --> this groupby is same as DBMS and it takes the mean of the groupby(same) values
+
+car_sales["Odometer (KM)"].plot() --> this will plot the particular column
+
+car_sales["Price"] = car_sales["Price"].str.replace('[\$\,\.]', '', regex=True).astype(int) --> this will change the datatype of our Price as it a string to an int
+
+
+//MANIPULATING Data
+
+car_sales["Make"]=car_sales["Make"].str.lower() --> convert the column to lower case
+
+The missing values in the column are represented by Nan value 
+
+carsalesmissing["Odometer"].fillna(carsalesmissing["Odometer"].mean())--> To fill the missing values, we will have to reassign this value
+
+carsalesmissing["Odometer"].fillna(carsalesmissing["Odometer"].mean(),inplace=True)--> To fill the missing values , this inplace will make the changes to this data set only and we will not need to reassign the values
+
+carsalesmissing.dropna(inplace=True) --> this will remove the rows which have Na in their row
+
+seats=pd.Series([5,5,5,5])
+car_sales["Seats"]=seats -->this add a new column to the data using the series
+
+seats=[3,4,2,5,1,2,3,4,5,3]
+car_sales["Seats"]=seats -->this adds a new column to the data using the python list (in this the number of values should be equal to the number of rows in our data)
+
+car_sales["New"]= car_sales["Doors"]*car_sales["Odometer (KM)"] --> creating a new column from existing columns
+
+car_sales["Faltu"]=pd.Series([3,4,5]) --> directly creating a new column
+
+car_sales["number"]=4 --> creating a new column from 1 value
+
+car_sales.drop("New",axis=1,inplace=True) --> to remove a column
+
+car_sales.sample(frac=0.1) --> this will shuffle 10% of the data row wise
+
+car_sales.reset_index(i) --> it add the old index(shuffled) as the new column on the left
+
+car_sales.reset_index(drop=True, inplace =True) --> this will reset only the index but will remove the old index column as added above
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+//NUMPY
+
+To view the documentation of np.function() press shift + tab while hovering on the function
+
+a1=np.array([1,2,3]) --> 1D array
+shape(1,3) --> 1 row and 3 column
+ 
+a2=np.array([[1,2,3],[4,5,6]]) --> 2D array
+shape(2,3) --> 2 row and 3 column
+
+a3=np.array([[[1,2,3],[4,5,6]],[[5,7,8],[9,10,11]]]) --> ND array (see photo)
+shape(2,3,2) --> 2 row and 3 column and 2 layers
+
+a1.shape --> gives the dimension(shape) of the array
+
+a1.dtype --> gives the data type of the array
+
+a1.size --> gives the number of elements in the array
+
+df=pd.DataFrame(a2) --> builds dataframe from numpy array
+
+array=np.ones((2,3)) --> gives the array of shape (2,3) all filled with ones
+
+array=np.zeros((2,3)) --> gives the array of shape (2,3) all filled with zeros
+
+array=np.arange(0,10,2) --> gives a 1D array with start, stop(exclusive) and step value 
+
+array=np.random.randint(0,10,size=(3,5)) --> gives an array with start and stop(exclusive) with size (3,5)
+
+array=np.random.random((5,3)) --> gives an array with shape (5,3) and numbers filled are [0,1)
+
+np.random.seed(seed=anynumber) --> this if written in the cell does not change the value of random numbers of the array if we again and again run the cell 
+
+eg:- np.random.seed(seed=7) or  np.random.seed(4534)

@@ -1,0 +1,87 @@
+1) BINARY SEARCH BASICS 
+binary search is applicable in sorted area only
+we use 3 pointers low , high and mid
+everything between low and high is always the search space
+when low passes high we cannot find the element
+overflow condition: if our high is suppose at INT_MAX and after some iterations our low reaches there as well , so our mid will overflow as we will perform INT_MAX + INT_MAX in our next iteration to avoid this
+i) declare the mid and low and high as long long 
+ii) do mid= low + (high-low)/2 ( simple maths )
+time complexity: O(logn)
+
+2) LOWER BOUND and SEARCH INSERT POSITION (low=mid+1)
+the smallest index for which the number is greater than or equal to that given number 
+arr[index]>= x ( we have to find smallest index for this )
+
+3) UPPER BOUND (low=mid+1)
+the smallest index for which the number is greater than to that given number 
+arr[index]> x ( we have to find smallest index for this )
+
+4) FLOOR( number which is less than and nearest to the given number )
+low= mid+1;
+
+4) CEIL and LOWER BOUND( number which is greater than and nearest to the given number ) ( hum issme piche check karenge by doing high=mid-1 as agar hummne aage wale numbers check kiye toh woh bade hi honge then the given number )
+high = mid-1;
+
+5) FIND FIRST AND LAST OCCURENCE OF X
+
+6) SEARCH IN A ROTATED SORTED ARRAY 
+in this case one side of the array will be sorted and other side will be not 
+so we have to check if our element exists between the sorted part 
+if it does we have to decrease our search space to that sorted portion else we have to search in the other portion of the array 
+
+7) SEARCH IN A ROTATED SORTED ARRAY WITH DUPLICATE ELEMENT 
+the method is same as the previous just that we have to add a condition that if our arr[low] and arr[mid] and arr[high] are equal then we are confused that in which array do we have to find 
+to eliminate this case we will decrease our search space by doing low++ and high-- till this condition is eliminated
+
+8) SEARCH MINIMUM IN ROTATED SORTED ARRAY
+we will first find the sorted half and take the minimum element from there so the sorted portion job is finished 
+next we will iterate in the unsorted portion as it may or may not contain the minimum element 
+
+9) FIND OUT HOW MANY TIMES ARRAY HAS BEEN ROATED 
+whatever is the index of the smallest element is the times that the array is ROTATED
+
+10) SINGLE ELEMENT IN A SORTED ARRAY 
+every element is twice and 1 element is once
+we have to check if we have same element before or after
+and after noticing all the elements before that 1 element are places on the index (even, odd) aaise but after the occurence of that single element we have indexes of repeated elements as (odd, even ) 
+so we will use this condition to eliminate the halves
+
+11) FINDING PEAK ELEMENT 
+
+i) FOR A SINGLE PEAK ELEMENT 
+see the graph in striver video of increasing and decreasing like mountain 
+first we will write code outside while for edge cases
+inside while we will write
+if the mid is on the peak itself return it 
+if the mid in on the increasing side then the peak element will be on the right
+if the mid in on the decreasing side then the peak element will be on the left
+
+ii) FOR MULTIPLE PEAK ELEMENT 
+the above code will still work we will just need to right the else part as if the mid is in the pit of the mountains then we have to right a condition in else that wheter it should go right or left as both the sides have peak elements in them.
+
+--------BINARY SEARCH ON ANSWERS------------------
+IF WE ARE ASKED TO FIND THE MAX OR MIN AND WE KNOW THE RANGE OF ANSWERS WE CAN ALWAYS USE BINARY SEARCH
+
+
+1) FINDING SQRT OF A NUMBER
+we will check the answer for the given range of 1 to n( given number )
+we basically have to check if num*num=n( given number )
+we will take mid=(low +high)/2 and check if mid*mid>n we will eliminate the entire right half and check for the left half
+else if it is less than or equal to answer we will update our ans varible as this may or may not be the closest floor value to sqrt(n)
+
+2) FINDING NTH ROOT OF A NUMBER
+same as above just instead of we will use num*num*num.....k times 
+
+3) FROM KOKO EATING BANANAS TO CAPACITY OF SHIP 
+in all the problems logic is same, that we have to find the range of answers and use binary search on it
+
+4) kth missing number
+in this we will use binary search on missing number 
+each number will have a variable missing associated ( we will not used any array of any kind it is just a variable )
+the missing = arr[ mid]-( mid+1) ( this is just the number which is currently there minus the number that should be present over there )
+and then we'll use binary search on missing and find the range of k between low and high 
+and return low+k ( formula derived )
+
+----------------------BINARY SEARCH ON ANSWERS FOR MIN OF MAX OR MAX OF MIN---------------------------------------------
+
+5) AGGRESSIVE COWS

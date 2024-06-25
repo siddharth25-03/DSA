@@ -1,0 +1,87 @@
+
+count digits
+for retreiving the last digit
+7789%10 =9
+778%10 =8
+77%10 =7
+7%10 =7
+In each iteration we will divide the number by 10--> n/10 (7789/10 ==> 778.9 ==> 778)
+
+this will retreive the digits in reverse fashion
+while(n>0){
+    lastdigit=n%10;
+    cout<<lastdigit
+    n=n/10;
+}
+
+-------------------------------------------------------------------------------------------------------------
+reversing the nums
+revnum =0;
+while(n>0){
+    lastdigit=n%10;
+    revnum=(revnum*10)+lastdigit;
+    cout<<lastdigit'
+    n=n/10;
+}
+
+-------------------------------------------------------------------------------------------------------------
+armstrong number
+
+the sum of the cube of the individual digits is equal to the number is known as armstrong number
+
+-------------------------------------------------------------------------------------------------------------
+print all divisors
+eg:- 36 
+
+
+1(i) x 36(n/i)
+2(i) x 18(n/i)
+3(i) x12(n/i)
+4(i) x 9(n/i)
+6(i) x 6(n/i)
+9 x 4
+12 x 3
+18 x 2
+36 x 1
+
+so after sqrt(n==>36) the numbers are repeating just in the reverse fashion
+
+for(int i =1;i<=sqrt(n);i++){
+    if(n%i==0){
+        cout<<i; 
+        // this is for the left hand side
+    }
+    if((n/i)!=i){
+        cout<< n/i;
+        // this is for the right hand side
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------
+check for prime
+
+can do it by above method just need to maintain a count (count==2 or not)
+
+-------------------------------------------------------------------------------------------------------------
+GCD
+gcd(a,b)
+while(a>0 && b>0){
+    if(a>b)
+    a=a%b;
+
+    else
+    b=b%a;
+}
+
+if(a==0) return b
+else return a 
+
+-------------------------------------------------------------------------------------------------------------
+decimal to binary
+
+we can convert any number from decimal to binary by:-
+continuous dividing it by 2 
+if the remainder is 0 we take the bit as 0 
+if the remainder is not 0 we take the bit as 1 
+
+link:- https://www.youtube.com/watch?v=qbxik29Z-2c
