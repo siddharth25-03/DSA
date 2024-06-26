@@ -85,3 +85,5 @@ and return low+k ( formula derived )
 ----------------------BINARY SEARCH ON ANSWERS FOR MIN OF MAX OR MAX OF MIN---------------------------------------------
 
 5) AGGRESSIVE COWS
+we take the minimum distance between 2 cows as 1 and maximum distance as distance between first and last position 
+so we apply binary search on this range ( distances between each consicutive cow )
