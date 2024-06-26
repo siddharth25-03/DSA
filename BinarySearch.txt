@@ -61,6 +61,7 @@ the above code will still work we will just need to right the else part as if th
 
 --------BINARY SEARCH ON ANSWERS------------------
 IF WE ARE ASKED TO FIND THE MAX OR MIN AND WE KNOW THE RANGE OF ANSWERS WE CAN ALWAYS USE BINARY SEARCH
+binary search on answers is like ✘✘✘✘✘✘✘✘✔✔✔✔✔✔✔✔✔✔✔✔✔✔✔
 
 
 1) FINDING SQRT OF A NUMBER
