@@ -143,6 +143,8 @@ same as stack
 --PRIORITY QUEUE--
 
 a tree like data structure is maintained inside of this
+stores the numbers in decending order 
+that mean pq.top will return the maximum number that is stored in the queue
 
 priority_queue<int>pq; --> also known as max heap
 pq.push(5);
