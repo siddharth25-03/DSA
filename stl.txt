@@ -145,6 +145,7 @@ same as stack
 a tree like data structure is maintained inside of this
 stores the numbers in decending order 
 that mean pq.top will return the maximum number that is stored in the queue
+the insertion opertion takes O(logn) time 
 
 priority_queue<int>pq; --> also known as max heap
 pq.push(5);
