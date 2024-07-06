@@ -308,3 +308,6 @@ To look at the latest element in the vector --> vec.back()
 
 lower = lower_bound(v.begin(), v.end(), 6);
 upper = upper_bound(v.begin(), v.end(), 6);
+
+To access the last element of the vector --> vec.back()
+To access the first element of the vector --> vec.front()
