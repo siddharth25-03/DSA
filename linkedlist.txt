@@ -1,0 +1,172 @@
+example of linked list is browser
+if we write Node* x= something that means that our something is of Node datatype
+
+the difference between Node and Node* is
+Node means that it is like the variable we are defining( like int x) we can access class elements through y.data
+Node * means that we are defining a pointer we can access class elements through  y->data
+
+STEPS TO CREATE LL
+
+class Node{ 
+    int data;
+    Node* next;
+
+    Node(data1,next1){
+        data=data1;
+        next=next1;
+    }
+    Node(data1){
+        data=data1;
+        next=nullptr;
+    }
+}
+
+Node *y= new Node(2);
+y->data;
+y->next;
+
+STEPS TO CREATE DLL
+
+class Node{ 
+    int data;
+    Node* next;
+    Node* prev;
+
+    Node(data1,next1,prev1){
+        data=data1;
+        next=next1;
+        prev=prev1;
+    }
+    Node(data1){
+        data=data1;
+        next=nullptr;
+    }
+}
+
+Node *y= new Node(2);
+y->data;
+y->next;
+y->prev
+
+1) ADD 2 NUMBERS IN THE LL ( sum basic addition of 2 numbers )
+IMP:- if we want to create a new linked list, create a dummynode and create the link list to avoid the head wale cheeze
+
+we will keep temp1 and temp2 to iterate in both the linked list 
+we will add both the numbers in the temp1 ka data and temp2 ka data
+then we will take the carry of addition of both the numbers by doing sum/10
+and keep the number before by doing sum%10
+and if carry still exists then add it in the end        
+
+2) ODD AND EVEN LINKED LIST 
+we will take 2 pointers one that is pointing to the odd(first place(head)) and the second pointer that is even(which is pointing to head->next) as even will always be ahead of the odd we will stop the while loop when the even is null or even ka next is null
+
+time complexity--> O(n)
+space complexity--> O(1)
+
+3) Sort a LinkedList of 0's, 1's and 2's 
+
+BRUTE: we will take 3 variables which keep the count of 0's 1's and 2's and after traversing the entire list we had updated the count of 0's, 1's and 2's 
+then we will again iterate the entire list and place the number of 0's, 1's and 2's in the linked list 
+ 
+time complexity--> O(2n)
+space complexity--> O(1)    
+
+OPTIMAL: we will take 3 dummy nodes which will be of zerohead, onehead and twohead and 3 pointers (zero one and two which will be pointing to them ) 
+and we will traverse the list if we get 0,1 or 2 we will add(no need to create a newnode) this to its respective linked dummy nodes that we have created
+after the whole traversal of the linked list we will link 0 to 1 and 1 to 2 (some exception see video)
+
+3) REMOVE THE NTH NODE FROM THE HEAD OF THE LINKED LIST
+
+BRUTE: we will first find the length of the linked list(O(n)) and then subtract the n from it to know how many times we have to iterate from the start to reach that value 
+then we will simply delete that value
+
+time complexity--> O(2n)
+space complexity--> O(1)    
+
+OPTIMAL: we will keep 2 pointers fast and slow, first we will iterate the fast and then the slow such that the slow is exactly n steps behind the fast pointer and then we will delete the slow->next
+
+time complexity--> O(n) {we are iterating through the elements till the fast reach the n value which cannot be greater than n }
+space complexity--> O(1)    
+
+4) FIND THE MIDDLE OF THE LINKED LIST 
+BRUTE: first finding the lenght of the linked list and then dividing it by 2 and then iterating again till that element
+
+time complexity--> O(n+n/2)
+space complexity--> O(1)    
+
+OPTIMAL ( tortoise and hare algorithm): we will take 2 pointers fast and slow, the fast one will iterate 2 times more than the slow one 
+till fast->next!=null or fast!=null
+this will ensure that the slow is at exactly half the length that the fast has traversed 
+
+time complexity--> O(n/2)
+space complexity--> O(1)    
+
+4) FIND THE CYCLE IN THE LINKED LIST 
+
+BRUTE: we will take a hashmap of<Node*,int> and we will increase the frequency if we encounter that element 
+if we encounter that particular element again( by using find on that element ) which we will if we have a loop then we will return true that we have a loop.
+
+time complexity--> O(n+2*logn(map ka time complexity))
+space complexity--> O(N)    
+
+OPTIMAL: we will take a fast and a slow pointer
+the fast pointer will move by 2 places and the slow pointer will move by 1
+there will be a point in the future where the both of them will collide as 
+suppose slow and fast as person( slow is ahead of fast, fast is trying to catch slow )
+slow is moving away from fast by 1 place and fast is moving towards slow by 2 steps so the net result is decrease in the their distance by 1
+so at a time in the future there will be a time when the fast will catch slow as the net decrease between them is 1 ( 5 4 3 2 1 0( collide ))
+
+time complexity--> O(n)
+space complexity--> O(1)    
+
+5) FIND THE STARTING POINT OF CYCLE IN THE LINKED LIST 
+
+BRUTE: we will take a hashmap of<Node*,int> and we will increase the frequency if we encounter that element 
+if we encounter that particular element again( by using find on that element ) we will return that element as it will be the starting point only.
+
+time complexity--> O(n+2*logn(map ka time complexity))
+space complexity--> O(N)   
+
+OPTIMAL: we will take a fast and a slow pointer
+the fast pointer will move by 2 places and the slow pointer will move by 1
+there will be a point in the future where the both of them will collide as 
+suppose slow and fast as person( slow is ahead of fast, fast is trying to catch slow )
+slow is moving away from fast by 1 place and fast is moving towards slow by 2 steps so the net result is decrease in the their distance by 1
+so at a time in the future there will be a time when the fast will catch slow as the net decrease between them is 1 ( 5 4 3 2 1 0( collide ))\
+
+after they have collided we will place slow at head and fast will stay where the collision happened
+then we will move them both by one step and the node at which they will again collide will be our answer
+
+time complexity--> O(n+n1);
+space complexity--> O(1)   
+
+6) FIND THE LENGHT OF CYCLE IN THE LINKED LIST 
+
+when we find the cycle by above method we again run a loop by taking fast as (fast =fast->next) and then placing a while loop till (fast!=slow) and doing a counter++ to find the length of the linked list
+
+7) DELETE THE MIDDLE OF THE LINKED LIST 
+
+8) FIND IF A LINKED LIST IS PALINDROME OR NOT 
+we will first find the middle of the linked list( see video (fast->next!=nullptr && fast->next->next!=nullptr)) and then we will reverse the other half by doing the reverse of the linked list and then compare the first half and the second half( second !=nullptr )
+
+9) FIND THE POINT OF INTERSECTION OF 2 LINKED LIST
+BRUTE: 
+1) by using the hashmap we traverse the first linked list and place the values in the hashmap 
+and then traverse the second linked list, 
+if we find value in the hashmap then it is the point of INTERSECTION
+
+2) by first finding the length of first ll and then of second ll 
+and then placing the pointer which is behind the other to its equal column and then starting the iteration
+
+OPTIMAL:
+we will start the iteration of both the temp1 and temp2 
+if temp1 is ahead suppose by 2 places then temp2 then temp1 will surely reach the null faster than temp2
+so to remove this 2 ka difference we will place the temp1 when it reaches to null to ( temp1=head2 ) as the head2 is 2 places behind the head1 this will nullify the difference
+when the temp2 reaches null we will place it at head1 to nullify the difference of 2 
+this will place both the temp1 and temp2 in same column then we can start our iteration again from this point 
+time complexity--> O(n1+n2);
+space complexity--> O(1)   
+
+
+
+
