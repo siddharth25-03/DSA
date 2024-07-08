@@ -1,0 +1,158 @@
+
+bit operation are very fast as computer understand this
+
+imp: operator precedence ka dhyan rakhna 
+
+if we encounter a -ve number than convert the number to 2's complement than only apply the operations which you want to
+
+imp:-
+last bit for all odd numbers will be set ( 8 (2 ka power )+4( 2 ka power )+1=13 )
+
+imp:-
+XOR gives the number of bits which are flipped in the 2 numbers, it gives 1 if the two bits are different and 0 if the bits are same
+
+decimal(base 10) to binary(base 2 ): divinding it by 2 till it reaches 1 and then adding the remainder %2 to the string of binary string
+
+binary(base 2) to decimal(base 10 ): multiplying the character in the string with the powers of 2( watch video ) and then adding to get the final number
+
+If we store the number 13 as an integer( 32 bits) computer converts the number to binary and then stores it in the computer but 13 is only 4 bits so the rest of the 28 bits are stores as zeros 
+when we print the number computer then converts the number from again binary to decimal and then prints it 
+
+same is with long long which is 64 bits 
+
+1's complement is flipping all the bits 
+2's complement is taking 1's complement and then adding 1 to it 
+
+computer stores +ve number waise hi jaisa hai in binary where 0 is the leftmost bit 
+computer stores -ve number in its 2's complement where the leftmost bit is 1 
+
+OPERATORS: all of these operations are done bit wise on both or a single number 
+
+1)AND ( & ) 
+all true then true 
+if one false than false
+
+2) OR( | ) 
+even if one true than true 
+all false than false 
+
+3) XOR( ^ )
+number of 1 is odd than 1
+number of 1 is even than 0
+
+4) right shift( 13>>1 )
+all the bits shift to the right side by 1 place 
+it is basically number/2^shift
+
+5) left shift ( 13<<1 )
+all the bits shift to the left side by 1 place 
+it is basically number*2^shift
+
+longest number that integer can store is 2^31-1 ( see video )
+smallest number that integer can store is -2^31 ( see video )
+
+6) NOT( ~ )
+it first flips all the bits 
+it then checks if it is -ve number 
+if it is -ve number than convert the number to 2's complement
+if it is +ve number than stop 
+
+*)) SWAPPING 2 NUMBERS WITHOUT A VARIABLE
+a=a^b;
+b=a^b which is equal to b=a^b^b ==> b=a
+a=a^b which is equal to a^b^b ==> a^b^a ==> a=b
+
+*)) CHECK IF ITH BIT IS SET OR NOT( by right shift or left shift )
+i)left shifting 1 to that bits column and doing an and operation to find if it is set or not
+
+ii)right shifting that number to 1 ka column and doing an and operation to find if it is set or not
+
+*)) SET THE ITH BIT
+
+taking the 1 to the column below that bit and then doing an OR operation to set it 
+
+*)) CLEAR THE ITH BIT
+
+taking the 1 to the column below that bit and then doing a NOT operation and then an AND operation to clear it 
+
+*)) TOGGLE THE ITH BIT
+
+taking the 1 to the column below that and then doing an XOR operation
+
+*)) REMOVE THE LAST SET BIT( RIGHTMOST )
+
+imp: 
+if we take N-1 of any N number than the rightmost set bit will be flipped along with all the bits that are on the right side of that bit will be flipped because of this 8 (2 ka power )+4( 2 ka power )+1=13  eg: 15 and 16 
+
+doing an AND operation of N and N-1
+
+*)) CHECK IF A NUMBER IS A POWER OF 2 
+
+imp: 
+if it is a power of 2 there will only be 1 set bit 
+
+doing and AND operation of N and N-1 and if it is equal to 0 than it is a power of 2 else not
+
+*)) COUNT THE NUMBER OF SET BITS 
+
+ct=0; 
+while(n>1){
+    ct+= n&1; 
+    n=n>>1;( right shift ) imp: this is basically doing n/2
+} 
+
+*)) SET THE LAST UNSET BIT
+doing an OR of n and n+1; 
+
+*)) RETREIVING THE RIGHTMOST BIT 
+to retrieve the rightmost set bit we will flip the rightmost set bit by doing N&N-1 and then do an XOR of 
+N^( N&N-1 ) as this will give us the rightmost bit which was the only bit which was flipped as the answer
+
+
+
+Q) Count number of bits to be flipped to convert A to B
+
+imp:-
+XOR gives the number of bits which are flipped in the 2 numbers, it gives 1 if the two bits are different and 0 if the bits are same
+
+after doing the above step we will calculate the number of 1's which are appearing in the result of XOR of both numbers( as those are the bits which are flipped )
+
+
+Q) POWER SET 
+
+so power set has 2^n sets where n is the number of element in the original given array 
+so if we go from 0 to 2^n-1( number of subsets ) and check for each number the set bits and add that set bit index number from our given array 
+to the ans array then that will be the answer 
+because the numbers from 0 to 2^n-1 are like permutation only
+000 
+001 (as the index 0 bit is set, we will add the value of index 0 from our given array to ans array )
+010 
+011 (as the index 0,1 bit is set, we will add the value of index 0,1 from our given array to ans array )
+100
+101 
+110 
+111
+
+Q) XOR OF NUMBERS IN A GIVEN RANGE 
+if we find the xor of number till N there is a pattern that we observe after every multiple of 4th iteration
+
+1 to N=1 --> 1
+1 to N=2 --> 3
+1 to N=3 --> 0
+1 to N=4 --> 4
+1 to N=5 --> 1
+1 to N=6 --> 7
+1 to N=7 --> 0
+1 to N=8 --> 8
+1 to N=9 --> 1
+
+so we observe that 
+N%4==1 then 1
+N%4==2 then N+1
+N%4==3 then 0
+N%4==0 then N 
+
+if we are given to find the XOR from L to R where L=4 and R=8 then
+we will find the xor of 1 to L-1 and of 1 to R 
+and then xor both of these ==> (1^2^3) ^ (1^2^3^4^5^6^7^8) ==> (4^5^6^7^8) which is equal to what we wanted to find
+
