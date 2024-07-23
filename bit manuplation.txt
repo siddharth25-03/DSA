@@ -5,6 +5,9 @@ imp: operator precedence ka dhyan rakhna
 
 if we encounter a -ve number than convert the number to 2's complement than only apply the operations which you want to
 
+imp:- returns the number of set bits in a number
+__builtin_popcount(int number);
+
 imp:-
 the AND operation of n&(n-1) remove the rightmost set bit ( or can be said as :- it converts bits to zero till the first set bit) 
 
