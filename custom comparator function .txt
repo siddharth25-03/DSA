@@ -1,4 +1,6 @@
-custom comparator function 
+
+
+custom comparator function video:- https://www.youtube.com/watch?v=3pvZhwp0U9w
 
 bool sorting(pair<int,int>a, pair<int,int>b){
     if(a.second==b.second){
