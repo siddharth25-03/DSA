@@ -18,3 +18,10 @@ so in the comparator function write the conditions as you want them to be in you
 as:- if you want the first number a to be less than b then write return a<b
 what this will do is if a<b is true then it will leave it as it is 
 but if a<b is false then it will swap the numbers
+
+
+LAMDA FUNCTIONS :-
+
+cout<< all_of(vec.begin(),vec.end(),[](int x){return x%2;});
+cout<< any_of(vec.begin(),vec.end(),[](int x){return x%2;});
+cout<< none_of(vec.begin(),vec.end(),[](int x){return x%2;});
