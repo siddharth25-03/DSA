@@ -1,0 +1,18 @@
+custom comparator function 
+
+bool sorting(pair<int,int>a, pair<int,int>b){
+    if(a.second==b.second){
+        return a.first>b.first;
+    }
+    return a.second<b.second;
+}
+
+sort(vec.begin(),vec.end(),sorting);
+
+
+---------------------------------------------------------------
+here the a is the first number and b is the next one like we do in normal sorting the a[i] and a[j] and swap them according to the conditions
+so in the comparator function write the conditions as you want them to be in your array 
+as:- if you want the first number a to be less than b then write return a<b
+what this will do is if a<b is true then it will leave it as it is 
+but if a<b is false then it will swap the numbers
