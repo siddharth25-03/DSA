@@ -8,6 +8,10 @@ if we encounter a -ve number than convert the number to 2's complement than only
 imp:- returns the number of set bits in a number
 __builtin_popcount(int number);
 
+imp:- BITMASKING 
+bitmasking for union ( OR )  and intersection ( AND )  
+bitmaking for subset generation ( 2^x-1 )
+
 imp:-
 the AND operation of n&(n-1) remove the rightmost set bit ( or can be said as :- it converts bits to zero till the first set bit) 
 
