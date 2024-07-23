@@ -6,6 +6,9 @@ imp: operator precedence ka dhyan rakhna
 if we encounter a -ve number than convert the number to 2's complement than only apply the operations which you want to
 
 imp:-
+the AND operation of n&(n-1) remove the rightmost set bit ( or can be said as :- it converts bits to zero till the first set bit) 
+
+imp:-
 last bit for all odd numbers will be set ( 8 (2 ka power )+4( 2 ka power )+1=13 )
 
 imp:-
