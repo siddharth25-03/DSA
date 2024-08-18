@@ -1,0 +1,45 @@
+Two pointer/ sliding window
+
+when to apply-->
+
+1) Constant Window
+
+2) Longest subarray/ substring where <condition> (
+    brute --> generating all the subarrays
+    better --> using the where condition
+    optimal --> using the if condition mtlb not shrinking below the maximum size because we want to find the max size so shrinking it by just 1
+
+)
+we will take a window where it has 2 concepts of expand(r) and shrink(l) {window is of l to r}
+imp: window size=r-l+1
+we keep shifitng the window( expand(r) ) as we have to find the longest subarray
+when we violate the condition we shrink(l)
+
+3) No of subarrays where <condition> 
+example:-  No of subarrays with sum=k it is very difficult in this to expand or to shrink 
+to solve this we will do
+
+No of subarrays with sum<=k ==> x   
+No of subarrays with sum<=(k-1) ==> y
+the answer would be x-y
+
+4) shortest/ minimum window where <condition> 
+just ulta of 2nd one
+
+Q) MAX CONSECUTIVE ONE |||
+brute:- generating all the subarrays and finding 
+
+better:- using l and r pointers both starting at zero and increasing r in each iteration 
+if our number of zeros extends k then we trim out the zeroes by shriking the size by l++ and doing the l++ till 
+our zeroes<=k using a while loop and then updating the length r-l+1
+
+time complexity--> O(N+N);
+space complexity--> O(1)   
+
+optimal( using an if instead of while ):- using l and r pointers both starting at zero and increasing r in each iteration 
+but if our zeroes>k then we decrease the size just by 1 as we want the maximum consecutive ones trimming the size down to bottom and then again expanding the size makes no sense 
+so we keep shrink the size no below our max size 
+basically we are only now checking or subarrays with size greater than our previous greater as that only will affect our answer
+
+time complexity--> O(N);
+space complexity--> O(1)   
