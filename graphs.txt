@@ -1,0 +1,182 @@
+degree of a graph = 2*number of edges in the graph
+
+a path cannot have a node appearing twice in the path
+
+weigth of the graph is taken as unit if it is not given
+
+**) if we want to find the minimum of something then apply bfs
+
+##) maximum number of edges in undirected graph is n*(n-1)/2
+##) maximum number of edges in directed graph is n*(n-1)
+
+##) the number of nodes(n) are are fixed but the number of edges(m) can increase or decrease( it does not depend on no of nodes)
+
+##) methods to represent the edges : adjacency matrix( int arr[n+1][n+1]) and adjacency lists (vector<int> v[N] that would be an array of N different vector<int> objects.)
+
+##) if the graphs are weighted we have to stor adj[u][v]=wt in matrix version and we have to store pairs in the case of lists version (vector<pair<int,int>> v[N])
+
+##) connected components: if there are multiple disconnected components in a graph then also it is called as a graph
+
+##) default traversal template: 
+ for(int  i to N){
+    if(!visited[i]) traversal(i);
+ }
+ 
+**) for both DFS and BFS traversal the answer will depend on the adjacency list
+
+##) BFS( level wise traversal ): level starts from 0 level
+*) only 1 node can be at level 0 which is the starting node
+TC: O(N+E) and not n*e find out why?
+
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        vector<int>ans;
+        vector<int>vis(V,0);
+        vis[0]=1; // we visit the first node through which we have to start
+        queue<int>q; 
+        q.push(0);
+        while(!q.empty()){
+            int node=q.front(); 
+            q.pop();
+            ans.emplace_back(node);
+            for(auto it : adj[node]){
+                if(!vis[it]){
+                    q.push(it); // only add those nodes in the queue which are not visited 
+                    vis[it]=1;  // mark them as visited 
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+
+##) DFS (going into the depth ): RECURSION
+
+void dfs(int start,vector<int>&ans,vector<int>&vis,vector<int> adj[]){
+    vis[start]=1;
+    ans.emplace_back(start);
+    for(auto it: adj[start]){
+        if(!vis[it]){
+            dfs(it,ans,vis,adj); // we will explore the one which come first fully if it is not visited
+        }
+    }
+}
+
+class Solution {
+  public:
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<int>vis(V,0);
+        vector<int>ans;
+        dfs(0,ans,vis,adj);
+        return ans;
+    }
+};
+
+##) shortcut for checking all the sides in a matrix
+int drow[]={-1,0,1,0};
+int dcol[]={0,1,0,-1};
+
+##) for cycle detection in a grph we need to carry the parent of the current node
+
+##) BIPARTITE GRAPHS 
+graphs that can be colored with 2 colors such that no 2 adjacent nodes have the same color
+*) if we have an odd length cycle then it cannot be a BIPARTITE
+*) if we have an even length cycle then it can be a BIPARTITE
+
+
+##) Detect cycle in a directed graph: we need to maintain 2 array visited and path visited
+
+##) TOPOLOGICAL SORT ( only works on directed acyclic graph (DAG)) : using stacks (using DFS)
+linear ordering of vertices such that if there is an edge between u and v, u appers before v in that ordering
+
+##) TOPOLOGICAL SORT ( only works on directed acyclic graph (DAG)) : using queues (using BFS) (kahn's algorithm)
+1) Finding all the nodes with indegree(make an array of indegrees of all the node ) as 0 as adding them to the queue as they are projecting on someone and we want them before in the SORT
+2) when we remove the node with indegree 0 remove the indegree of the nodes it is connected to 
+3) repeat the same process till !q.empty()
+
+*) if the topo sort has less then V elements then we know that a cyclic graph exists relating to kahn's algorithm
+
+##) SHORTEST PATH ALGORITHMS AND PROBLEMS
+
+**) after the weights have been updated we then again push them into the queue as we have to update the distance of all the neighbouring nodes also to the minimum distance that we have found now 
+
+##) DJIKSTRA'S ALGORITHM (can be solved using priority queue, queue and set)
+tc: ElogV
+*) why not to use queue is because it is like brute force and considers all the paths, pq and set traverse the minimum path first 
+queue:- bad
+priority queue:- better
+set:- best
+
+1) priority queue: storing the {dist,node} in min heap(priority queue)
+priority queue does not have front() method, only queue has it
+
+priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq
+
+DJIKSTRA does not work on 
+i) negative weights (it falls in an infinite loop as the weights keep on decreasing )
+ii) negative cycle
+
+2) SET 
+if we use set we can remove the already visited path, only thats the difference
+if the node has been visited before and if we found some other better distance, then we can erase the previosly inserted value in set
+  
+**) if we have each of the edge distances as 1 then we can use queue for DJIKSTRA'S algorithm
+
+##) BELLMANFORD ALGORITHM (for negative cycle) tc: V*E (more than DJIKSTRA)
+
+*) applicable only to directed graphs
+*) if the path weight is < 0
+*) can contain the edges in any sequent manner it does not matter 
+
+solving: 
+1) we have to relax all the edges n-1 times sequentially 
+relax==> dist[u]+wt<dist[v] then dist[v]=dist[u]+wt
+
+**) WHY N-1 CYCLES ONLY CHECK FROM VIDEO
+
+**) IT CAN DETECT NEGATIVE CYCLE AS THE WEIGHT KEEPS ON DECREASING: we can perform the NTH iteration and it the relaxation happens then also then we can say thay we have a negative weighted cycle 
+
+
+**) DJIKSTRA and BELLMANFORD are single source shortest path algorithms that means from a single source node we are removing the shortest path to the destination node
+
+##) floyd warshall algorithm: multiple source shortest path , also helps in detecting negative CYCLES
+solving: go through every node from source to destination that means
+
+we change the via varible : 1 -> n-1
+if via is 0 we take every i and j in the matrix and it should go through it 
+i -> 0 and then 0 -> j
+
+**) it can detect negative weighted cycles as the the matrix[i][i] should be 0 as the starting and the ending point is same so it should take 0 distance but in negative weighted cycle is will be below 0 
+
+tc: n^3 
+if we apply DJIKSTRA on every node instead it would be much better than this
+
+
+##) MINIMUM SPANNING TREE
+*) there can be multiple spanning trees
+SPANNING TREE: a tree in which we have N nodes and n-1 edges and all nodes are reachable from each other
+mst means that the spanning tree of that graph has minimum sum of weight    
+
+PRIM'S ALGO:-
+just think how sanchit solved it 
+priority queue of {wt,node,parent}
+we will also take a visited array
+1)select any vertex and choose the smallest weight from G 
+2) at each stage choose the edge of smallest weight joining the vertex which are not yet included
+3) continue till all vertices are included
+
+DISJOINT SET:- helps in finding that 5 belong to the set of 1 or not in constant time not like dfs which takes more time
+
+main features: 1) find parent 2) union( joining the nodes with each other  ): rank and size
+*) path compression
+
+KRUSHKAL'S ALGORITHM:
+
+

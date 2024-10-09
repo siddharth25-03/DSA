@@ -1,0 +1,9 @@
+types of binary trees:-
+1) full binary tree: every node has either has 0 or 2 children 
+2) complete binary tree: all levels are completely filled except for the last level, the last level has all nodes as left as possible
+3) perfect binary tree: all leaf nodes are at same level  
+2) balanced binary tree: height of the tree is at max log(n) where n is the number of nodes
+2) degenerate binary tree: all nodes have exactly 1 child 
+
+DFS traversal:- inorder(lvr), preorder(vlr), postorder(lrv)
+BFS traversal:- traversing breadth wise 
