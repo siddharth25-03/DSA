@@ -1,3 +1,4 @@
+we read the bits from right to left
 
 bit operation are very fast as computer understand this
 
